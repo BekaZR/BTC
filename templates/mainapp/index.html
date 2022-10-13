@@ -3,7 +3,7 @@
 {% block content %}
 
 
-<form action="{% url 'depth' %}" method="post">
+<form action="{% url 'action' %}" method="post">
     {% csrf_token %}
     <label for="currencly">Выберите пары валют</label>
     <select class="form-control" name="currencly" id="currencly">
@@ -28,6 +28,10 @@
 </form>
 
 
+{% if data %}
 
+{{data}}
+
+{% endif %}
 
 {% endblock %}

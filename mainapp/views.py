@@ -14,31 +14,18 @@ def index(request):
             "list_currencly": list_currencly,
             }
         return render(request, 'mainapp/index.html', context)
-    
+
+
+def action_(request):
     if request.method == "POST":
         method_ = request.POST.get('method')
         currencly = request.POST.get('currencly')
         if method_ == "depth":
-            data = requests.get(url=f"https://yobit.net/api/3/depth/{currencly}?ignore_invalid=1").text
+            data = requests.get(url=f"https://yobit.net/api/3/{method_}/{currencly}?ignore_invalid=1").text
             context = {
-                "asks": json.loads(data).get(f'{currencly}').get('asks'),
-                "bids": json.loads(data).get(f'{currencly}').get('bids'),
-                "list_currencly": list_currencly,
+                "data": data,
                 }
-            print("\n"*10, data)
-            return render(request, 'mainapp/index.html', context)
-    
-
-
-def depth(request):
-    if request.method == "POST":
-        method_ = request.POST.get('method')
-        currencly = request.POST.get('currencly')
-        if method_ == "depth":
-            data = requests.get(url=f"https://yobit.net/api/3/depth/{currencly}?ignore_invalid=1").text
-            context = {
-                "asks": json.loads(data).get(f'{currencly}').get('asks'),
-                "bids": json.loads(data).get(f'{currencly}').get('bids'),
-                }
-            print("\n"*10, data)
             return render(request, 'mainapp/depth.html', context)
+    
+
+
