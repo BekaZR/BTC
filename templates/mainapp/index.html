@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<form action="{% url 'depth' %}" method="post">
+    {% csrf_token %}
+    <label for="currencly">Выберите пары валют</label>
+    <select class="form-control" name="currencly" id="currencly">
+
+        {% for curr in list_currencly %}
+            <option value="{{curr}}">{{curr}}</option>
+        {% endfor %}
+    </select>
+
+    <label for="method">Выберите метод</label>
+    <select name="method" id="method">
+
+        <option value="depth">Получить списки активных ордеров</option>
+        <option value="ticker">Получить статистическую информацию</option>
+        <option value="trades">Получить последние сделки</option>
+
+    </select>
+
+    <button type="submit" class="minimal-indent">Download</button>
+
+    
+</form>
+
+
+
+
+{% endblock %}
